@@ -1,65 +1,110 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Sparkles, MessageCircle, Camera, CheckCircle2 } from "lucide-react";
+
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="min-h-screen bg-[#f7f7f8]">
+      <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-6 py-10 md:flex-row md:items-center md:gap-12">
+        <div className="md:w-1/2">
+          <motion.header
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#111827]">
+              GLOWGUIDE
+            </p>
+            <h1 className="mt-4 text-4xl font-semibold tracking-tight text-[#111827] sm:text-5xl">
+              Smarter routines,
+              <br className="hidden sm:block" /> fewer products.
+            </h1>
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-[#4b5563] sm:text-base">
+              In a few quick steps, GlowGuide builds a derm‑inspired morning and
+              evening plan that keeps your routine lean, focused and tailored to
+              your skin.
+            </p>
+          </motion.header>
+
+          <motion.div
+            className="mt-8 flex flex-col gap-3 sm:flex-row"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.4 }}
           >
-            Documentation
-          </a>
+            <Link
+              href="/quiz"
+              className="inline-flex items-center justify-center rounded-full bg-[#2563eb] px-7 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#1d4ed8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-2"
+            >
+              Tell us your concerns
+            </Link>
+            <Link
+              href="/quiz?step=photo"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-[#d1d5db] bg-white px-7 py-3 text-sm font-semibold text-[#111827] transition hover:border-[#2563eb] hover:text-[#2563eb] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-2"
+            >
+              <Camera className="h-4 w-4" />
+              Upload a photo
+            </Link>
+          </motion.div>
+
+          <motion.div
+            className="mt-6 flex flex-wrap gap-3 text-xs text-[#6b7280]"
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25, duration: 0.3 }}
+          >
+            <div className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 shadow-sm">
+              <Sparkles className="h-3 w-3 text-[#2563eb]" />
+              <span>Derm‑inspired routines</span>
+            </div>
+            <div className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 shadow-sm">
+              <MessageCircle className="h-3 w-3 text-[#2563eb]" />
+              <span>No generic product spam</span>
+            </div>
+          </motion.div>
         </div>
-      </main>
+
+        <motion.section
+          className="mt-10 w-full md:mt-0 md:w-1/2"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.4 }}
+        >
+          <div className="rounded-3xl bg-white p-5 shadow-md sm:p-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#6b6f76]">
+              A peek at your plan
+            </p>
+            <div className="mt-3 grid gap-4 text-sm text-[#111827] sm:grid-cols-2">
+              <div>
+                <p className="text-xs font-medium uppercase tracking-[0.16em] text-[#6b6f76]">
+                  Morning
+                </p>
+                <ul className="mt-2 space-y-1.5 text-xs text-[#4b5563]">
+                  <li>• Gel cleanser</li>
+                  <li>• Calming hydrating serum</li>
+                  <li>• Lightweight SPF 50</li>
+                </ul>
+              </div>
+              <div>
+                <p className="text-xs font-medium uppercase tracking-[0.16em] text-[#6b6f76]">
+                  Evening
+                </p>
+                <ul className="mt-2 space-y-1.5 text-xs text-[#4b5563]">
+                  <li>• Gentle cleanse</li>
+                  <li>• Targeted treatment serum</li>
+                  <li>• Barrier‑supporting moisturizer</li>
+                </ul>
+              </div>
+            </div>
+            <div className="mt-4 rounded-2xl bg-[#f3f4f6] px-4 py-3 text-xs text-[#4b5563]">
+              GlowGuide prioritizes a small, high‑impact routine over a long
+              shelf of products, so you know exactly what matters most.
+            </div>
+          </div>
+        </motion.section>
+      </div>
     </div>
   );
 }
