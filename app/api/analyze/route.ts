@@ -19,9 +19,32 @@ export async function POST(request: NextRequest) {
     const { skinType, concerns, goals, photoBase64 } = body as SkinProfile;
     const products = loadProductDatabase().products;
 
-    const imagePart: { inlineData: GenerativeContentBlob } | null = photoBase64
-      ? { inlineData: { mimeType: "image/jpeg", data: photoBase64 } }
-      : null;
+    let imageBase64: string | undefined;
+    let imageMimeType: string | undefined;
+
+    if (photoBase64) {
+      if (photoBase64.startsWith("data:")) {
+        const match = /^data:(.+?);base64,(.+)$/.exec(photoBase64);
+        if (match) {
+          imageMimeType = match[1];
+          imageBase64 = match[2];
+        } else {
+          imageBase64 = photoBase64;
+        }
+      } else {
+        imageBase64 = photoBase64;
+      }
+    }
+
+    const imagePart: { inlineData: GenerativeContentBlob } | null =
+      imageBase64
+        ? {
+            inlineData: {
+              mimeType: imageMimeType ?? "image/jpeg",
+              data: imageBase64,
+            },
+          }
+        : null;
 
     const userContext = [
       "User profile:",

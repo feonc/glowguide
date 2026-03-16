@@ -8,11 +8,6 @@ import { SkinQuiz } from "@/components/SkinQuiz";
 import type { SkinProfile, AIAnalysisResult } from "@/types";
 import { ANALYSIS_STORAGE_KEY } from "@/lib/constants";
 
-function stripDataUrlPrefix(dataUrl: string): string {
-  const i = dataUrl.indexOf(",");
-  return i >= 0 ? dataUrl.slice(i + 1) : dataUrl;
-}
-
 function QuizPageContent() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,9 +22,7 @@ function QuizPageContent() {
           skinType: profile.skinType,
           concerns: profile.concerns,
           goals: profile.goals,
-          photoBase64: profile.photoBase64
-            ? stripDataUrlPrefix(profile.photoBase64)
-            : undefined,
+          photoBase64: profile.photoBase64 ?? undefined,
         };
         const res = await fetch("/api/analyze", {
           method: "POST",
