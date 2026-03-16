@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useState, useCallback } from "react";
@@ -12,7 +13,7 @@ function stripDataUrlPrefix(dataUrl: string): string {
   return i >= 0 ? dataUrl.slice(i + 1) : dataUrl;
 }
 
-export default function QuizPage() {
+function QuizPageContent() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -121,5 +122,19 @@ export default function QuizPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function QuizPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <p className="text-[#A8907A]">Loading...</p>
+        </div>
+      }
+    >
+      <QuizPageContent />
+    </Suspense>
   );
 }
